@@ -89,6 +89,69 @@ const AppProvider = ({ children }) => {
     AsyncStorage.removeItem("token");
   };
 
+  //get all users
+  const getAllUsers = async () => {
+    dispatch({ type: GET_USERS_BEGIN });
+
+    try {
+      const response = await axios.get("http://10.0.2.2:5000/api/auth/users");
+      const { users } = response.data;
+      dispatch({
+        type: GET_USERS_SUCCESS,
+        payload: { users },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_USERS_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+  };
+
+  //subscribe handler
+  const subscribeHandler = async (subData) => {
+    dispatch({ type: SUBSCRIBE_TEACHER_BEGIN });
+    try {
+      const response = await axios.patch(
+        `http://10.0.2.2:5000/api/v1/students/subscribe/${state.user._id}`,
+        subData
+      );
+      await getAllUsersStd();
+      dispatch({
+        type: SUBSCRIBE_TEACHER_SUCCESS,
+        // payload: { AllSubjects },
+        payload: { userID: state.user._id },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: SUBSCRIBE_TEACHER_END,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    // getAllSubjects();
+  };
+  //get all notices
+  const getAllNoticesStd = async () => {
+    getAllUsersStd();
+    dispatch({ type: STUDENT_GET_ALL_NOTICES_BEGIN });
+
+    try {
+      const response = await axios.get(
+        "http://10.0.2.2:5000/api/v1/students/notices",
+        { params: { subscribeIds: state.mySubscribeList } }
+      );
+      const { notices } = response.data;
+      dispatch({
+        type: STUDENT_GET_ALL_NOTICES_SUCCESS,
+        payload: { notices },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_USERS_ERROR,
+      });
+    }
+  };
   return (
     <AppContext.Provider
       value={{
@@ -96,6 +159,9 @@ const AppProvider = ({ children }) => {
         loginUser,
         registerUser,
         logOutUser,
+        getAllNoticesStd,
+        subscribeHandler,
+        getAllUsers,
       }}
     >
       {children}
