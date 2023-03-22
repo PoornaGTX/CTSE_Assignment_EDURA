@@ -12,6 +12,7 @@ import morgan from "morgan";
 import connectDB from "./db/connect.js";
 
 // routers
+import studentRoutes from "./routes/studentRoutes.js";
 
 const port = process.env.PORT || 5000;
 
@@ -23,6 +24,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ msg: "Welcome" });
 });
+
+app.use("/api/v1/students", studentRoutes);
 
 const start = async () => {
   try {
