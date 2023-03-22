@@ -12,6 +12,7 @@ import morgan from "morgan";
 import connectDB from "./db/connect.js";
 
 // routers
+import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 
 const port = process.env.PORT || 5000;
@@ -24,6 +25,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ msg: "Welcome" });
 });
+
+app.use("/api/auth", authRoutes);
 
 app.use("/api/v1/students", studentRoutes);
 

@@ -14,7 +14,7 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 
 const Stack = createNativeStackNavigator();
-const Bottom = createBottomTabNavigator();
+// const Bottom = createBottomTabNavigator();
 
 import { useAppContext } from "./context/appContext";
 import { AppProvider } from "./context/appContext";
@@ -32,7 +32,7 @@ function AuthStack() {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      {/* <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
     </Stack.Navigator>
   );
 }

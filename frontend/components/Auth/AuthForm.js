@@ -61,6 +61,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
         break;
       case "subject":
         setEnteredTeacherSub(enteredValue);
+        break;
       case "description":
         setEnteredTeacherDes(enteredValue);
         break;
@@ -157,7 +158,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           <Input
             label="Description"
             onUpdateValue={updateInputValueHandler.bind(this, "description")}
-            value={enteredTeacherSub}
+            value={enteredTeacherDes}
             // isInvalid={lastNameIsInvalid}
             placeholder="Description"
           />
