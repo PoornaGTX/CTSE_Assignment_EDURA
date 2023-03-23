@@ -18,6 +18,9 @@ import {
   ADD_GRADE_BEGIN,
   ADD_GRADE_SUCCESS,
   ADD_GRADE_ERROR,
+  GET_GRADES_BEGIN,
+  GET_GRADES_SUCCESS,
+  GET_GRADES_ERROR,
 } from "./action";
 
 const reducer = (state, action) => {
@@ -190,6 +193,32 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ADD_GRADE_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "hello",
+    };
+  }
+
+  //get grades
+  if (action.type === GET_GRADES_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_GRADES_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      grades: action.payload.AllGrades,
+      alertType: "success",
+      alertText: "User Created! Redirecting",
+    };
+  }
+
+  if (action.type === GET_GRADES_ERROR) {
     return {
       ...state,
       isLoading: false,
