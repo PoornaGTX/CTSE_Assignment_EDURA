@@ -61,4 +61,20 @@ const deleteNotice = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Success! Notice removed" });
 };
 
-export { createNotice, getAllNotices, updateNotice, deleteNotice, };
+// send message
+const sendMessage = async (req, res) => {
+  const { messageSender, chatRoomOwner, message } = req.body;
+  //   req.body.createdBy = req.user.userId;
+  const addedMessage = await Message.create(req.body);
+  res
+    .status(StatusCodes.CREATED)
+    .json({ data: addedMessage, msg: "Message successfully added" });
+};
+
+const getAllMessages = async (req, res) => {
+  const { id: chatRoomOwner } = req.params;
+  const allMessages = await Message.find({ chatRoomOwner });
+  res.status(StatusCodes.OK).json({ allMessages });
+};
+
+export { createNotice, getAllNotices, updateNotice, deleteNotice, sendMessage, getAllMessages };
