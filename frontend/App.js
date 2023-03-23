@@ -8,13 +8,15 @@ import { Colors } from "./constants/styles";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 //screens
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
+import GradesScreen from "./screens/GradesScreen";
 
 const Stack = createNativeStackNavigator();
-// const Bottom = createBottomTabNavigator();
+const Bottom = createBottomTabNavigator();
 
 import { useAppContext } from "./context/appContext";
 import { AppProvider } from "./context/appContext";
@@ -34,6 +36,57 @@ function AuthStack() {
       <Stack.Screen name="Signup" component={SignupScreen} />
       {/* <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
     </Stack.Navigator>
+  );
+}
+
+//use by admin
+const AdminBottomTabHome = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#0D25A7" },
+        headerTitleAlign: "center",
+        headerTintColor: "white",
+        contentStyle: { backgroundColor: Colors.primaryBackgroud },
+      }}
+    >
+      <Stack.Screen
+        name="All Grades"
+        component={GradesScreen}
+        options={{
+          headerTitleAlign: "center",
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+function AuthenticatedStack() {
+  // const user = "Admin";
+  const { user, logOutUser } = useAppContext();
+
+  return (
+    <Bottom.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#0D25A7" },
+        tabBarStyle: { backgroundColor: "#0D25A7" },
+        tabBarActiveTintColor: "red",
+      }}
+    >
+      {user.type === "Admin" && (
+        <Bottom.Screen
+          name="AdminHome"
+          component={AdminBottomTabHome}
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color="white" />
+            ),
+          }}
+        />
+      )}
+    </Bottom.Navigator>
   );
 }
 
