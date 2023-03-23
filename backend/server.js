@@ -14,7 +14,11 @@ import connectDB from "./db/connect.js";
 // routers
 import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
+
 import adminRoutes from "./routes/adminRoutes.js";
+
+import teacherRoutes from "./routes/teacherRoutes.js"
+
 
 const port = process.env.PORT || 5000;
 
@@ -32,6 +36,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/v1/students", studentRoutes);
 
 app.use("/api/v1/admin", adminRoutes);
+
+app.use("/api/v1/teacher", teacherRoutes);
+
 
 const start = async () => {
   try {
