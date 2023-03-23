@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Alert,
   View,
   StyleSheet,
   ImageBackground,
   Dimensions,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
 import { useAppContext } from "../context/appContext";
