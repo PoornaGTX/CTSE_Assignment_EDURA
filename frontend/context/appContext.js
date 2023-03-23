@@ -9,6 +9,9 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_ERROR,
   LOGOUT_BEGIN,
+  ADD_GRADE_BEGIN,
+  ADD_GRADE_SUCCESS,
+  ADD_GRADE_ERROR,
 } from "./action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -152,6 +155,26 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+
+  //add grade by admin
+  const addGrade = async (gradeData) => {
+    dispatch({ type: ADD_GRADE_BEGIN });
+
+    try {
+      const response = await axios.post(
+        "http://10.0.2.2:5000/api/v1/admin/grades",
+        gradeData
+      );
+      dispatch({
+        type: ADD_GRADE_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_GRADE_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+  };
   return (
     <AppContext.Provider
       value={{
@@ -162,6 +185,7 @@ const AppProvider = ({ children }) => {
         getAllNoticesStd,
         subscribeHandler,
         getAllUsers,
+        addGrade,
       }}
     >
       {children}

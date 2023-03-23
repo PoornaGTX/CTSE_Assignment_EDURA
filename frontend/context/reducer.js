@@ -15,6 +15,9 @@ import {
   SUBSCRIBE_TEACHER_BEGIN,
   SUBSCRIBE_TEACHER_SUCCESS,
   SUBSCRIBE_TEACHER_END,
+  ADD_GRADE_BEGIN,
+  ADD_GRADE_SUCCESS,
+  ADD_GRADE_ERROR,
 } from "./action";
 
 const reducer = (state, action) => {
@@ -162,6 +165,31 @@ const reducer = (state, action) => {
   }
 
   if (action.type === STUDENT_GET_ALL_NOTICES_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "hello",
+    };
+  }
+
+  //ADD grade
+  if (action.type === ADD_GRADE_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === ADD_GRADE_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "User Created! Redirecting",
+    };
+  }
+
+  if (action.type === ADD_GRADE_ERROR) {
     return {
       ...state,
       isLoading: false,
