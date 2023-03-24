@@ -17,6 +17,8 @@ import GradesScreen from "./screens/GradesScreen";
 import ManageGradesScreen from "./screens/ManageGradesScreen";
 import GradeSubjects from "./screens/GradeSubjects";
 import ManageSubjectScreen from "./screens/ManageSubjectScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import StatsScreenAdmin from "./screens/StatsScreenAdmin";
 
 const Stack = createNativeStackNavigator();
 const Bottom = createBottomTabNavigator();
@@ -37,7 +39,7 @@ function AuthStack() {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
-      {/* <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} /> */}
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
     </Stack.Navigator>
   );
 }
@@ -111,6 +113,21 @@ function AuthenticatedStack() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color="white" />
             ),
+          }}
+        />
+      )}
+
+      {user.type === "Admin" && (
+        <Bottom.Screen
+          name="Stats"
+          component={StatsScreenAdmin}
+          options={{
+            tabBarShowLabel: false,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="stats-chart" size={size} color="white" />
+            ),
+            headerTitleAlign: "center",
+            headerTintColor: "white",
           }}
         />
       )}
