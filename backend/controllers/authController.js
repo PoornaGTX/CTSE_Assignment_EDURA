@@ -47,6 +47,7 @@ const register = async (req, res) => {
       teacherSubject: user.teacherSubject,
       Grade: user.Grade,
       teacherDescription: user.teacherDescription,
+      _id: user._id,
     },
     token,
   });
@@ -145,7 +146,7 @@ const showStats = async (req, res) => {
       },
     },
     { $sort: { "_id.year": -1, "_id.month": -1 } },
-    { $limit: 8 }, //limit is use to get latest 6 month data
+    { $limit: 8 },
   ]);
 
   monthelUserCreations = monthelUserCreations
