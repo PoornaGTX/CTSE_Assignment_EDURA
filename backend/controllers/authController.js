@@ -47,6 +47,7 @@ const register = async (req, res) => {
       teacherSubject: user.teacherSubject,
       Grade: user.Grade,
       teacherDescription: user.teacherDescription,
+      _id: user._id,
     },
     token,
   });
