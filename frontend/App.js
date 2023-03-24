@@ -16,6 +16,7 @@ import SignupScreen from "./screens/SignupScreen";
 import GradesScreen from "./screens/GradesScreen";
 import ManageGradesScreen from "./screens/ManageGradesScreen";
 import GradeSubjects from "./screens/GradeSubjects";
+import ManageSubjectScreen from "./screens/ManageSubjectScreen";
 
 const Stack = createNativeStackNavigator();
 const Bottom = createBottomTabNavigator();
@@ -73,6 +74,16 @@ const AdminBottomTabHome = () => {
         name="ManageGrade"
         component={ManageGradesScreen}
         options={{ presentation: "modal", title: "Manage Grades" }}
+      />
+
+      <Stack.Screen
+        name="ManageSubjects"
+        component={ManageSubjectScreen}
+        options={{
+          presentation: "modal",
+          title: "Manage Subject",
+          headerTitleAlign: "center",
+        }}
       />
     </Stack.Navigator>
   );
