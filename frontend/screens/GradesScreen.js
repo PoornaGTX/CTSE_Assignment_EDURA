@@ -19,8 +19,6 @@ const GradesScreen = ({ navigation }) => {
   const { getAllGrades, grades } = useAppContext();
   const isFocused = useIsFocused();
 
-  console.log(grades);
-
   const renderGradesItem = (itemData) => {
     const pressHandler = () => {
       navigation.navigate("Subjects", { singlegardeID: itemData.item.Grade });

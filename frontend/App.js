@@ -14,6 +14,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import GradesScreen from "./screens/GradesScreen";
+import ManageGradesScreen from "./screens/ManageGradesScreen";
+import GradeSubjects from "./screens/GradeSubjects";
 
 const Stack = createNativeStackNavigator();
 const Bottom = createBottomTabNavigator();
@@ -56,6 +58,21 @@ const AdminBottomTabHome = () => {
         options={{
           headerTitleAlign: "center",
         }}
+      />
+
+      <Stack.Screen
+        name="Subjects"
+        component={GradeSubjects}
+        options={{
+          contentStyle: { backgroundColor: "#8208E2" },
+          headerTitleAlign: "center",
+        }}
+      />
+
+      <Stack.Screen
+        name="ManageGrade"
+        component={ManageGradesScreen}
+        options={{ presentation: "modal", title: "Manage Grades" }}
       />
     </Stack.Navigator>
   );

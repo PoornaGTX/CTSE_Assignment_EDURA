@@ -21,6 +21,9 @@ import {
   GET_GRADES_BEGIN,
   GET_GRADES_SUCCESS,
   GET_GRADES_ERROR,
+  GET_SUBJECTS_BEGIN,
+  GET_SUBJECTS_SUCCESS,
+  GET_SUBJECTS_ERROR,
 } from "./action";
 
 const reducer = (state, action) => {
@@ -219,6 +222,32 @@ const reducer = (state, action) => {
   }
 
   if (action.type === GET_GRADES_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "hello",
+    };
+  }
+
+  //get subjects
+  if (action.type === GET_SUBJECTS_BEGIN) {
+    return { ...state, isLoading: true, showAlert: false };
+  }
+
+  if (action.type === GET_SUBJECTS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      subjects: action.payload.AllSubjects,
+      alertType: "success",
+      alertText: "User Created! Redirecting",
+    };
+  }
+
+  if (action.type === GET_SUBJECTS_ERROR) {
     return {
       ...state,
       isLoading: false,
