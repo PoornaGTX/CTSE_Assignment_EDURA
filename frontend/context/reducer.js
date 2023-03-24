@@ -24,6 +24,19 @@ import {
   GET_SUBJECTS_BEGIN,
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_ERROR,
+  UPDATE_GRADE_BEGIN,
+  UPDATE_GRADE_SUCCESS,
+  UPDATE_GRADE_ERROR,
+  DELETE_GRADE_BEGIN,
+  UPDATE_SUBJECT_BEGIN,
+  UPDATE_SUBJECT_SUCCESS,
+  UPDATE_SUBJECT_ERROR,
+  DELETE_SUBJECT_BEGIN,
+  DELETE_SUBJECT_SUCCESS,
+  DELETE_SUBJECT_ERROR,
+  ADD_SUBJECT_BEGIN,
+  ADD_SUBJECT_SUCCESS,
+  ADD_SUBJECT_ERROR,
 } from "./action";
 
 const reducer = (state, action) => {
@@ -248,6 +261,96 @@ const reducer = (state, action) => {
   }
 
   if (action.type === GET_SUBJECTS_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "hello",
+    };
+  }
+
+  //delete grade
+  if (action.type === DELETE_GRADE_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  //updateGrade
+  if (action.type === UPDATE_GRADE_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === UPDATE_GRADE_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Subject Updated",
+    };
+  }
+
+  if (action.type === UPDATE_GRADE_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+  //updateSubject
+  if (action.type === UPDATE_SUBJECT_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }
+
+  if (action.type === UPDATE_SUBJECT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Subject Updated",
+    };
+  }
+
+  if (action.type === UPDATE_SUBJECT_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      // alertText: action.payload.msg,
+    };
+  }
+
+  //delete subject
+  if (action.type === DELETE_SUBJECT_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  //ADD Subjects
+  if (action.type === ADD_SUBJECT_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === ADD_SUBJECT_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "User Created! Redirecting",
+    };
+  }
+
+  if (action.type === ADD_SUBJECT_ERROR) {
     return {
       ...state,
       isLoading: false,

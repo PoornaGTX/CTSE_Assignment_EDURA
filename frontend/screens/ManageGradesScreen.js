@@ -80,21 +80,21 @@ const ManageGradesScreen = ({ route, navigation }) => {
 
     //check if exisiting grade already in the DB
 
-    const checkExsisitigGrade = grades.some(
-      (grade) => grade.Grade === gradeValue && grade.color === colorGrade
-    );
-    if (checkExsisitigGrade) {
-      return Alert.alert("DB ERROR", "Sorry Grade is already in DB", [
-        { text: "OK", onPress: () => navigation.goBack() },
-      ]);
-    }
+    // const checkExsisitigGrade = grades.some(
+    //   (grade) => grade.Grade === gradeValue && grade.color === colorGrade
+    // );
+    // if (checkExsisitigGrade) {
+    //   return Alert.alert("DB ERROR", "Sorry Grade is already in DB!1", [
+    //     { text: "OK", onPress: () => navigation.goBack() },
+    //   ]);
+    // }
 
     if (isEditing) {
       const checkExsisitigGrade = grades.some(
-        (grade) => grade.Grade === gradeValue
+        (grade) => grade.Grade === gradeValue && grade.color === colorGrade
       );
       if (checkExsisitigGrade) {
-        return Alert.alert("DB ERROR", "Sorry Grade is already in DB!!!!!!", [
+        return Alert.alert("DB ERROR", "Sorry Grade is already in DB!", [
           { text: "OK", onPress: () => navigation.goBack() },
         ]);
       }
@@ -105,7 +105,7 @@ const ManageGradesScreen = ({ route, navigation }) => {
         (grade) => grade.Grade === gradeValue
       );
       if (checkExsisitigGrade) {
-        return Alert.alert("DB ERROR", "Sorry Grade is already in DB!!!!!!");
+        return Alert.alert("DB ERROR", "Sorry Grade is already in DB!");
       }
     }
 
@@ -142,6 +142,7 @@ const ManageGradesScreen = ({ route, navigation }) => {
         alertText={alertText}
         showAlert={showAlert}
         Manage
+        isEditing={isEditing}
       />
 
       {isEditing && (

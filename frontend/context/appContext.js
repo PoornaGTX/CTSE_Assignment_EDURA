@@ -18,6 +18,19 @@ import {
   GET_SUBJECTS_BEGIN,
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_ERROR,
+  UPDATE_GRADE_BEGIN,
+  UPDATE_GRADE_SUCCESS,
+  UPDATE_GRADE_ERROR,
+  DELETE_GRADE_BEGIN,
+  UPDATE_SUBJECT_BEGIN,
+  UPDATE_SUBJECT_SUCCESS,
+  UPDATE_SUBJECT_ERROR,
+  DELETE_SUBJECT_BEGIN,
+  DELETE_SUBJECT_SUCCESS,
+  DELETE_SUBJECT_ERROR,
+  ADD_SUBJECT_BEGIN,
+  ADD_SUBJECT_SUCCESS,
+  ADD_SUBJECT_ERROR,
 } from "./action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -204,6 +217,25 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+  //add subject
+  const addSubject = async (subjectdata) => {
+    dispatch({ type: ADD_SUBJECT_BEGIN });
+
+    try {
+      const response = await axios.post(
+        "http://10.0.2.2:5000/api/v1/admin/",
+        subjectdata
+      );
+      dispatch({
+        type: ADD_SUBJECT_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ADD_SUBJECT_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+  };
 
   //get all subjects
   const getAllSubjects = async () => {
@@ -223,7 +255,76 @@ const AppProvider = ({ children }) => {
         // payload: { msg: error.response.data.msg },
       });
     }
-    console.log(state.subjects);
+  };
+
+  //update subject
+  const updateGrade = async (smongoGradeeID, gradeData) => {
+    dispatch({ type: UPDATE_GRADE_BEGIN });
+
+    try {
+      const response = await axios.patch(
+        `http://10.0.2.2:5000/api/v1/admin/grades/${smongoGradeeID}`,
+        gradeData
+      );
+      dispatch({
+        type: UPDATE_GRADE_SUCCESS,
+        // payload: { AllSubjects },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_GRADE_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+    getAllGrades();
+  };
+
+  //delete subject
+  const deleteGrade = async (GradeIDMongo) => {
+    dispatch({ type: DELETE_GRADE_BEGIN });
+
+    try {
+      const response = await axios.delete(
+        `http://10.0.2.2:5000/api/v1/admin/grades/${GradeIDMongo}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //update subject
+  const updateSubject = async (subjectID, subData) => {
+    dispatch({ type: UPDATE_SUBJECT_BEGIN });
+
+    try {
+      const response = await axios.patch(
+        `http://10.0.2.2:5000/api/v1/admin/${subjectID}`,
+        subData
+      );
+      dispatch({
+        type: UPDATE_SUBJECT_SUCCESS,
+        // payload: { AllSubjects },
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_SUBJECT_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+    getAllSubjects();
+  };
+
+  //delete subject
+  const deleteSubject = async (subjectID) => {
+    dispatch({ type: DELETE_SUBJECT_BEGIN });
+
+    try {
+      const response = await axios.delete(
+        `http://10.0.2.2:5000/api/v1/admin/${subjectID}`
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -239,6 +340,11 @@ const AppProvider = ({ children }) => {
         addGrade,
         getAllGrades,
         getAllSubjects,
+        updateGrade,
+        deleteGrade,
+        deleteSubject,
+        updateSubject,
+        addSubject,
       }}
     >
       {children}

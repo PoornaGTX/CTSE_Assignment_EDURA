@@ -15,9 +15,6 @@ import { images } from "../constants/Images/images";
 import SubjectGirdTitle from "../components/SubjectGirdTitle";
 import IconButton from "../components/icons/IconButton";
 
-//LoadingOverlay
-import LoadingOverLay from "../components/LoadingOverLay/LoadingOverLay";
-
 //context
 import { useAppContext } from "../context/appContext";
 
