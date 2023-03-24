@@ -667,7 +667,51 @@ const reducer = (state, action) => {
       alertType: "danger",
       alertText: "hello",
     };
-    throw new Error(`no such action : ${action.type}`);
   }
+  // admin stats
+  if (action.type === SHOW_STATS_BEGIN) {
+    return {
+      ...state,
+      isLoading: true,
+      showAlert: false,
+    };
+  }
+
+  if (action.type === SHOW_STATS_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      adminStats: action.payload.adStats,
+      monthelUserCreations: action.payload.admonthelUserCreations,
+    };
+  }
+
+  //new password after reset
+
+  if (action.type === LOGIN_NEWPASSWORD) {
+    return { ...state, isLoading: true };
+  }
+
+  if (action.type === LOGIN_NEWPASSWORD_COMPLETE) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: action.payload.msg,
+    };
+  }
+
+  if (action.type === LOGIN_NEWPASSWORD_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: "Error",
+    };
+  }
+
+  throw new Error(`no such action : ${action.type}`);
 };
 export default reducer;

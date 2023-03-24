@@ -31,6 +31,11 @@ import {
   ADD_SUBJECT_BEGIN,
   ADD_SUBJECT_SUCCESS,
   ADD_SUBJECT_ERROR,
+  SHOW_STATS_BEGIN,
+  SHOW_STATS_SUCCESS,
+  LOGIN_NEWPASSWORD,
+  LOGIN_NEWPASSWORD_COMPLETE,
+  LOGIN_NEWPASSWORD_ERROR,
 } from "./action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -44,6 +49,9 @@ const initialState = {
   isLogedIn: false,
   grades: [],
   subjects: [],
+  adminStats: {},
+  monthelUserCreations: [],
+  studentNotices: [],
 };
 
 const AppContext = React.createContext();
@@ -327,6 +335,40 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const passwordReset = async (newCredentials) => {
+    dispatch({ type: LOGIN_NEWPASSWORD });
+    try {
+      const response = await axios.post(
+        "http://10.0.2.2:5000/api/auth/resetpassword",
+        newCredentials
+      );
+      dispatch({
+        type: LOGIN_NEWPASSWORD_COMPLETE,
+        payload: { msg: response.data.msg },
+      });
+    } catch (error) {
+      dispatch({
+        type: LOGIN_NEWPASSWORD_ERROR,
+      });
+    }
+  };
+
+  const adminShowStats = async () => {
+    dispatch({ type: SHOW_STATS_BEGIN });
+
+    try {
+      const { data } = await axios.get("http://10.0.2.2:5000/api/auth/stats");
+
+      dispatch({
+        type: SHOW_STATS_SUCCESS,
+        payload: {
+          adStats: data.defaultStats,
+          admonthelUserCreations: data.monthelUserCreations,
+        },
+      });
+    } catch (error) {}
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -345,6 +387,8 @@ const AppProvider = ({ children }) => {
         deleteSubject,
         updateSubject,
         addSubject,
+        passwordReset,
+        adminShowStats,
       }}
     >
       {children}
