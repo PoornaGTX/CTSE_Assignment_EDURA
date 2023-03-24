@@ -15,6 +15,9 @@ import {
   GET_GRADES_BEGIN,
   GET_GRADES_SUCCESS,
   GET_GRADES_ERROR,
+  GET_SUBJECTS_BEGIN,
+  GET_SUBJECTS_SUCCESS,
+  GET_SUBJECTS_ERROR,
 } from "./action";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -27,6 +30,7 @@ const initialState = {
   token: "",
   isLogedIn: false,
   grades: [],
+  subjects: [],
 };
 
 const AppContext = React.createContext();
@@ -199,10 +203,29 @@ const AppProvider = ({ children }) => {
         // payload: { msg: error.response.data.msg },
       });
     }
-    console.log("====================================");
-    console.log(grades);
-    console.log("====================================");
   };
+
+  //get all subjects
+  const getAllSubjects = async () => {
+    dispatch({ type: GET_SUBJECTS_BEGIN });
+
+    try {
+      const response = await axios.get("http://10.0.2.2:5000/api/v1/admin/");
+      const { AllSubjects } = response.data;
+
+      dispatch({
+        type: GET_SUBJECTS_SUCCESS,
+        payload: { AllSubjects },
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_SUBJECTS_ERROR,
+        // payload: { msg: error.response.data.msg },
+      });
+    }
+    console.log(state.subjects);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -215,6 +238,7 @@ const AppProvider = ({ children }) => {
         getAllUsers,
         addGrade,
         getAllGrades,
+        getAllSubjects,
       }}
     >
       {children}
