@@ -96,26 +96,6 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // const authFetch = axios.create({
-  //   baseURL: "http://10.0.2.2:5000/api",
-  //   headers: {
-  //     Authorization: `Bearer ${state.token}`,
-  //   },
-  // });
-  // authFetch.interceptors.response.use(
-  //   (response) => {
-  //     return response;
-  //   },
-  //   (error) => {
-  //     if (error.response.status === 401) {
-  //       // logoutUser(););
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
-
-  //register user
-
   const registerUser = async (currentUser) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
