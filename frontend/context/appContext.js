@@ -162,7 +162,7 @@ const AppProvider = ({ children }) => {
         payload: { msg: error.response.data.msg },
       });
     }
-    adminShowStats();
+    // adminShowStats();
   };
 
   const logOutUser = async () => {
@@ -316,6 +316,7 @@ const AppProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    getAllSubjects();
   };
 
   //delete subject
