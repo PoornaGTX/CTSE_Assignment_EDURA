@@ -10,18 +10,9 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useIsFocused } from "@react-navigation/core";
 
-//components
-import SubjectGirdTitle from "../components/SubjectGirdTitle";
-import IconButton from "../components/icons/IconButton";
-import { KnowledgelabContext } from "../store/KLab-context";
-
-//LoadingOverlay
-import LoadingOverLay from "../components/LoadingOverLay/LoadingOverLay";
-
 //context
 import { useAppContext } from "../context/appContext";
 import SingleSubject from "../components/SingleSubject";
-// import { users } from "../dummyData/data";
 import SingleTeacher from "../components/SingleTeacher";
 import { images } from "../constants/Images/images";
 import { LinearGradient } from "expo-linear-gradient";

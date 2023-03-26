@@ -591,40 +591,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const passwordReset = async (newCredentials) => {
-    dispatch({ type: LOGIN_NEWPASSWORD });
-    try {
-      const response = await axios.post(
-        "http://10.0.2.2:5000/api/auth/resetpassword",
-        newCredentials
-      );
-      dispatch({
-        type: LOGIN_NEWPASSWORD_COMPLETE,
-        payload: { msg: response.data.msg },
-      });
-    } catch (error) {
-      dispatch({
-        type: LOGIN_NEWPASSWORD_ERROR,
-      });
-    }
-  };
-
-  const adminShowStats = async () => {
-    dispatch({ type: SHOW_STATS_BEGIN });
-
-    try {
-      const { data } = await axios.get("http://10.0.2.2:5000/api/auth/stats");
-
-      dispatch({
-        type: SHOW_STATS_SUCCESS,
-        payload: {
-          adStats: data.defaultStats,
-          admonthelUserCreations: data.monthelUserCreations,
-        },
-      });
-    } catch (error) {}
-  };
-
   return (
     <AppContext.Provider
       value={{
@@ -652,8 +618,6 @@ const AppProvider = ({ children }) => {
         sendMessage,
         updateUser,
         getAllUsers,
-        adminShowStats,
-        passwordReset,
         getAllNoticesStd,
       }}
     >

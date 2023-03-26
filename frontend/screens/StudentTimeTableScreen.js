@@ -11,13 +11,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useIsFocused } from "@react-navigation/core";
 import TimeTable from "@mikezzb/react-native-timetable";
-//components
-import SubjectGirdTitle from "../components/SubjectGirdTitle";
-import IconButton from "../components/icons/IconButton";
-import { KnowledgelabContext } from "../store/KLab-context";
-
-//LoadingOverlay
-import LoadingOverLay from "../components/LoadingOverLay/LoadingOverLay";
 
 //context
 import { useAppContext } from "../context/appContext";

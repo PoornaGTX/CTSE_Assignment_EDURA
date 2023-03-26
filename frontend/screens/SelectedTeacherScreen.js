@@ -12,8 +12,6 @@ import {
   ImageBackground,
 } from "react-native";
 
-//http request
-// import { createSubject, updateSubject, deleteSubjecthttp } from "../utill/http";
 import { useAppContext } from "../context/appContext";
 import { useIsFocused } from "@react-navigation/core";
 import LoadingOverLay from "../components/LoadingOverLay/LoadingOverLay";

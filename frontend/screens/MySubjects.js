@@ -14,10 +14,6 @@ import { images } from "../constants/Images/images";
 //components
 import SubjectGirdTitle from "../components/SubjectGirdTitle";
 import IconButton from "../components/icons/IconButton";
-import { KnowledgelabContext } from "../store/KLab-context";
-
-//LoadingOverlay
-import LoadingOverLay from "../components/LoadingOverLay/LoadingOverLay";
 
 //context
 import { useAppContext } from "../context/appContext";
